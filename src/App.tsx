@@ -20,60 +20,51 @@ function AppleSwitch({ checked, onChange }: { checked: boolean; onChange: () => 
     <label className="apple-switch" title={checked ? "Light Mode On" : "Light Mode Off"}>
       <input type="checkbox" checked={checked} onChange={onChange} />
       <motion.div
-        className="slider-thumb"
-        layout
-        initial={false}
+        style={{
+          position: 'absolute',
+          top: '2px',
+          left: '2px',
+          width: '28px',
+          height: '28px',
+          borderRadius: '50%',
+          backgroundColor: 'white',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          boxShadow: '0 0 6px rgba(255, 255, 255, 0.6)',
+          userSelect: 'none',
+          pointerEvents: 'none',
+        }}
         animate={{ x: checked ? 26 : 0 }}
-        transition={{ type: "tween", duration: 0.3, ease: "easeInOut" }}
+        transition={{ type: 'tween', duration: 0.3, ease: 'easeInOut' }}
       >
-        {checked ? (
-          <FiSun size={20} color="black" />
-        ) : (
-          <FiMoon size={20} color="white" />
-        )}
+        {checked ? (<FiSun size={20} color="black" />) : (<FiMoon size={20} color="white" />)}
       </motion.div>
       <style>{`
-        .apple-switch {
-          position: relative;
-          display: inline-block;
-          width: 60px;
-          height: 32px;
-          border-radius: 20px;
-          background-color: #333;
-          border: 2px solid white;
-          cursor: pointer;
-          user-select: none;
-        }
-        .apple-switch input {
-          opacity: 0;
-          width: 0;
-          height: 0;
-          position: absolute;
-        }
+         .apple-switch {
+           position: relative;
+           display: inline-block;
+           width: 60px;
+           height: 32px;
+           border-radius: 16px; /* Make the outer box rounded */
+           background-color: #333;
+           border: 2px solid white;
+           cursor: pointer;
+           user-select: none;
+         }
+         .apple-switch input {
+           opacity: 0;
+           width: 0;
+         }
         .slider-track {
           position: relative;
           width: 100%;
           height: 100%;
-          border-radius: 20px;
-          background-color: #333;
+          border-radius: 16px; /* Updated to make it round */
+          background-color: transparent;
           border: 2px solid white;
           box-sizing: border-box;
-        }
-        .slider-thumb {
-          position: absolute;
-          top: 2px;
-          left: 2px;
-          width: 28px;
-          height: 28px;
-          border-radius: 50%;
-          background-color: white;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          box-shadow: 0 0 6px rgba(255, 255, 255, 0.6);
-          user-select: none;
-          pointer-events: none;
-        }
+         }
       `}</style>
     </label>
   );
@@ -220,13 +211,14 @@ export default function App() {
         />
       </div>
       <div className="calculator">
-        <motion.div
-          className="display"
-          animate={controls}
-          initial={{ x: 0 }}
-        >
-          {display}
-        </motion.div>
+        <div className="display">
+          <motion.div
+            animate={controls}
+            initial={{ x: 0 }}
+          >
+            {display}
+          </motion.div>
+        </div>
         <div className="buttons">
           {buttons.map((btn, i) => (
             <button

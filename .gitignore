@@ -1,0 +1,7 @@
+node_modules
+
+# Coders in Flow shadow git storage
+.codersinflow/
+
+# macOS system files
+.DS_Store
